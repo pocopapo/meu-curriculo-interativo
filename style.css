@@ -22,12 +22,12 @@ body {
     background: var(--space-black);
     font-family: 'Inter', sans-serif;
     color: var(--text-primary);
-    height: 100vh;
+    min-height: 100vh;
     width: 100vw;
     display: flex;
     align-items: center;
     justify-content: center;
-    overflow: hidden;
+    overflow-x: hidden; /* Evita que a tela dance para os lados */
 }
 
 /* --- COSMOS ENGINE (FUNDO DINÂMICO) --- */
@@ -72,7 +72,8 @@ body {
 /* --- APP CONTAINER --- */
 .app-container {
     width: 95vw;
-    height: 90vh;
+    max-width: 1200px;
+    height: 90vh; /* Altura fixa no Desktop */
     display: grid;
     grid-template-columns: 320px 1fr;
     background: var(--glass);
@@ -85,7 +86,7 @@ body {
     overflow: hidden;
 }
 
-/* --- SIDEBAR (IDENTIDADE & CONTATOS) --- */
+/* --- SIDEBAR --- */
 .sidebar-minimal {
     padding: 50px 40px;
     border-right: 1px solid var(--border);
@@ -99,81 +100,72 @@ body {
     background: var(--space-black);
     border-radius: 20px;
     border: 2px solid var(--neon-cyan);
-    box-shadow: 0 0 20px rgba(0, 243, 255, 0.3);
-    display: flex; align-items: center; justify-content: center;
     overflow: hidden; margin-bottom: 25px;
     transition: var(--transition-smooth);
 }
 
 .avatar-image { width: 100%; height: 100%; object-fit: cover; }
 
-.hex-avatar:hover {
-    transform: scale(1.05) rotate(3deg);
-    border-color: var(--neon-magenta);
-    box-shadow: 0 0 30px rgba(255, 0, 255, 0.4);
-}
-
 .sidebar-minimal h1 { font-family: 'Syncopate', sans-serif; font-size: 1rem; letter-spacing: 1px; }
 .sidebar-minimal h1 span { display: block; color: var(--neon-cyan); margin-top: 5px; }
-.status { font-size: 0.6rem; color: var(--neon-magenta); text-transform: uppercase; margin-top: 10px; letter-spacing: 2px; font-weight: 700; }
 
-.contact-card { margin-top: auto; }
-.info-group { margin-bottom: 25px; }
-.info-group label { display: block; font-size: 0.6rem; color: rgba(255, 255, 255, 0.3); font-weight: 800; letter-spacing: 1px; margin-bottom: 5px; }
-
-/* LINKS DE CONTATO INTERATIVOS */
 .contact-link {
-    display: block;
-    font-size: 0.8rem;
-    color: var(--text-secondary);
-    text-decoration: none;
-    transition: var(--transition-smooth);
-    word-break: break-all;
+    display: block; font-size: 0.8rem; color: var(--text-secondary);
+    text-decoration: none; transition: var(--transition-smooth);
 }
 
-.contact-link:hover {
-    color: var(--neon-cyan);
-    text-shadow: 0 0 10px rgba(0, 243, 255, 0.5);
-    transform: translateX(5px);
-}
+.contact-link:hover { color: var(--neon-cyan); transform: translateX(5px); }
 
-/* --- CONTENT HUB & BENTO --- */
+/* --- CONTENT HUB --- */
 .content-hub { padding: 50px 60px; overflow-y: auto; }
-.hub-header { display: flex; justify-content: space-between; margin-bottom: 40px; font-family: 'Syncopate'; font-size: 0.7rem; color: rgba(255, 255, 255, 0.2); }
-.clock { color: var(--neon-cyan); letter-spacing: 2px; }
 
 .bento-grid { display: flex; flex-direction: column; gap: 15px; }
 .bento-item { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border); border-radius: 24px; transition: var(--transition-smooth); cursor: pointer; }
 .bento-trigger { padding: 30px 40px; display: flex; align-items: center; gap: 25px; }
-.id { color: var(--neon-cyan); font-family: 'Syncopate'; font-size: 0.8rem; opacity: 0.6; }
-.bento-trigger h3 { font-size: 0.85rem; letter-spacing: 2px; font-family: 'Syncopate'; }
-
 .bento-content { max-height: 0; opacity: 0; overflow: hidden; padding: 0 40px; transition: var(--transition-smooth); }
-.bento-item.active { background: rgba(0, 243, 255, 0.03); border-color: var(--neon-cyan); }
 .bento-item.active .bento-content { max-height: 1000px; opacity: 1; padding-bottom: 40px; }
 
 /* --- TECH SHOWCASE --- */
-.tech-showcase { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 15px; margin-top: 10px; }
-.tech-pill { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); padding: 20px; border-radius: 18px; display: flex; align-items: center; gap: 18px; transition: var(--transition-smooth); }
-.pill-icon { width: 45px; height: 45px; background: rgba(0, 243, 255, 0.1); color: var(--neon-cyan); display: flex; align-items: center; justify-content: center; border-radius: 12px; font-weight: 700; font-family: 'Syncopate'; font-size: 0.7rem; border: 1px solid rgba(0, 243, 255, 0.2); }
-.pill-text strong { display: block; font-size: 0.85rem; }
-.pill-text small { color: var(--text-secondary); font-size: 0.65rem; text-transform: uppercase; }
+.tech-showcase { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 15px; }
+.tech-pill { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border); padding: 20px; border-radius: 18px; display: flex; align-items: center; gap: 18px; }
 
-.tech-html .pill-icon { color: #e34f26; background: rgba(227, 79, 38, 0.1); border-color: rgba(227, 79, 38, 0.2); }
-.tech-css .pill-icon { color: #1572b6; background: rgba(21, 114, 182, 0.1); border-color: rgba(21, 114, 182, 0.2); }
+/* --- MEDIA QUERIES PARA CELULAR --- */
+@media (max-width: 992px) {
+    body {
+        overflow-y: auto; /* Permite rolar a página no celular */
+        padding: 20px 0;
+    }
 
-.tech-pill:hover { background: var(--glass-hover); transform: translateY(-5px); border-color: var(--neon-cyan); box-shadow: 0 10px 30px rgba(0, 243, 255, 0.15); }
-.tech-html:hover { border-color: #e34f26; box-shadow: 0 10px 30px rgba(227, 79, 38, 0.15); }
-.tech-css:hover { border-color: #1572b6; box-shadow: 0 10px 30px rgba(21, 114, 182, 0.15); }
+    .app-container {
+        grid-template-columns: 1fr; /* Muda para 1 coluna */
+        height: auto; /* Altura cresce conforme o conteúdo */
+        width: 95vw;
+        border-radius: 30px;
+    }
 
-/* TEXTOS INTERNOS */
-p { color: var(--text-secondary); line-height: 1.8; font-size: 0.95rem; }
-.exp-box { border-left: 2px solid var(--neon-magenta); padding-left: 20px; }
-.comp { display: block; color: var(--neon-cyan); font-weight: bold; margin-bottom: 5px; }
+    .sidebar-minimal {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        text-align: center;
+        align-items: center;
+        padding: 40px 20px;
+    }
 
-/* RESPONSIVIDADE */
-@media (max-width: 1024px) {
-    .app-container { grid-template-columns: 1fr; height: auto; overflow: visible; }
-    .sidebar-minimal { border-right: none; border-bottom: 1px solid var(--border); }
-    body { overflow-y: auto; padding: 20px 0; }
+    .contact-card {
+        margin-top: 30px;
+        text-align: left; /* Alinhamento para facilitar o clique */
+    }
+
+    .content-hub {
+        padding: 40px 20px;
+    }
+
+    .tech-showcase {
+        grid-template-columns: 1fr; /* IT Cards um abaixo do outro no mobile */
+    }
+}
+
+@media (max-width: 480px) {
+    .sidebar-minimal h1 { font-size: 0.9rem; }
+    .bento-trigger { padding: 20px; }
 }
